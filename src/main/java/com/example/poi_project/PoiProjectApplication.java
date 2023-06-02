@@ -8,7 +8,6 @@ public class PoiProjectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PoiProjectApplication.class, args);
-        System.out.println("gg");
     }
 
 }
