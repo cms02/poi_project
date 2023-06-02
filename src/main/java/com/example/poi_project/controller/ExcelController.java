@@ -1,6 +1,9 @@
 package com.example.poi_project.controller;
 
 import com.example.poi_project.dto.CarExcelDto;
+import com.example.poi_project.excel.ExcelFile;
+import com.example.poi_project.excel.multiplesheet.MultiSheetExcelFile;
+import com.example.poi_project.excel.onesheet.OneSheetExcelFile;
 import com.example.poi_project.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Cell;
@@ -63,5 +66,16 @@ public class ExcelController {
         }
         response.setContentType("application/vnd.ms-excel");
         workbook.write(response.getOutputStream());
+    }
+
+    @GetMapping("/api/v2/excel/car")
+    public void downloadCarInfo2(HttpServletResponse response) throws IOException {
+        response.setContentType("application/x-msdownload");
+//        response.setContentType("application/vnd.ms-excel");
+        List<CarExcelDto> result = carService.getCarInfo();
+
+        ExcelFile excelFile = new MultiSheetExcelFile(result, CarExcelDto.class);
+        excelFile.write(response.getOutputStream());
+
     }
 }

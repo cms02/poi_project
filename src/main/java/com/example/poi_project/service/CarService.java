@@ -16,9 +16,9 @@ public class CarService {
                     .name("name" + i)
                     .price(i)
                     .rating(0.9)
-                    .price(1000000)
                     .build());
         }
+        result.forEach(r-> System.out.println(r.getPrice()));
         return result;
     }
 }
